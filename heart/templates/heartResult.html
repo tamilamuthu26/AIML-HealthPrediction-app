@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Disease Prediction Result</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Prediction Result</h1>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% elif result %}
+        <p>The prediction is: {{ result }}</p>
+    {% else %}
+        <p>No result to display.</p>
+    {% endif %}
+    
+    <a href="{% url 'heart_form' %}" class="btn btn-primary">Go Back to Prediction Form</a>
+</body>
+</html>

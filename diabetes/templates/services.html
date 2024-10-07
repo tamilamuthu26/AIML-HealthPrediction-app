@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Prediction - Services</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .card {
+            margin: 20px 0;
+        }
+        .service-row {
+            align-items: center;
+            margin-bottom: 30px; /* Adds gap between rows */
+        }
+        .service-image {
+            max-width: 300px;
+            height: 200px; /* Uniform height */
+            object-fit: cover; /* Ensures image fits the box without distortion */
+        }
+        .chatbot-container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .chatbot {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .input-group {
+            width: 100%;
+        }
+    </style>
+    {% load static %}
+</head>
+<body>
+
+<header class="bg-primary text-white text-center py-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{% url 'home' %}">Health Prediction App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'services' %}">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="container my-4">
+    <section class="text-center mb-4">
+        <h1>Our Services</h1>
+        <p>Explore the various services we offer to help you manage your health.</p>
+    </section>
+
+    <!-- Existing Services -->
+    <div class="row service-row mb-4">
+        <div class="col-md-4">
+            <img src="{% static 'images/service1.png' %}" alt="Diabetes Prediction" class="img-fluid service-image">
+        </div>
+        <div class="col-md-8">
+            <h5 class="card-title">Diabetes Prediction</h5>
+            <p class="card-text">Predict your risk of diabetes based on personal health data and historical trends.</p>
+            <a href="{% url 'predict_diabetes' %}" class="btn btn-primary">Start Prediction</a>
+        </div>
+    </div>
+
+    <div class="row service-row mb-4">
+        <div class="col-md-4">
+            <img src="{% static 'images/service3.jpg' %}" alt="Nutrition Guidance" class="img-fluid service-image">
+        </div>
+        <div class="col-md-8">
+            <h5 class="card-title">Nutrition Guidance</h5>
+            <p class="card-text">Receive personalized nutrition advice based on your health status and goals.</p>
+            <a href="#" class="btn btn-primary" data-toggle="collapse" data-target="#chatbotSection">Chat with our Nutrition Bot</a>
+        </div>
+    </div>
+    <div class="row service-row mb-4">
+        <div class="col-md-4">
+            <img src="{% static 'images/service2.jpg' %}" alt="Health Monitoring" class="img-fluid service-image">
+        </div>
+        <div class="col-md-8">
+            <h5 class="card-title">Health Monitoring</h5>
+            <p class="card-text">Track your vital health metrics over time to understand your health better.</p>
+            <a href="#" class="btn btn-primary">Learn More</a>
+        </div>
+    </div>
+
+
+    <!-- New Prediction Services -->
+    <div class="row service-row mb-4">
+        <div class="col-md-4">
+            <img src="{% static 'images/service4.jpg' %}" alt="Heart Disease Prediction" class="img-fluid service-image">
+        </div>
+        <div class="col-md-8">
+            <h5 class="card-title">Heart Disease Prediction</h5>
+            <p class="card-text">Predict your risk of heart disease using advanced machine learning algorithms.</p>
+            <a href="{% url 'predict_heart_disease' %}" class="btn btn-primary">Predict Now</a>
+        </div>
+    </div>
+
+    <div class="row service-row mb-4">
+        <div class="col-md-4">
+            <img src="{% static 'images/service5.png' %}" alt="Cancer Risk Prediction" class="img-fluid service-image">
+        </div>
+        <div class="col-md-8">
+            <h5 class="card-title">Cancer Risk Prediction</h5>
+            <p class="card-text">Analyze your genetic data and health history to assess your risk of various cancers.</p>
+            <a href="#" class="btn btn-primary">Assess Risk</a>
+        </div>
+    </div>
+
+    <div class="row service-row mb-4">
+        <div class="col-md-4">
+            <img src="{% static 'images/service6.jpeg' %}" alt="Cholesterol Monitoring" class="img-fluid service-image">
+        </div>
+        <div class="col-md-8">
+            <h5 class="card-title">Cholesterol Monitoring</h5>
+            <p class="card-text">Keep track of your cholesterol levels with predictive analysis and timely recommendations.</p>
+            <a href="#" class="btn btn-primary">Monitor Now</a>
+        </div>
+    </div>
+
+    <!-- Chatbot Section -->
+    <div id="chatbotSection" class="collapse chatbot-container">
+        <h4>Nutrition Guidance Chatbot</h4>
+        <div class="chatbot" id="chatbot">
+            <div><strong>Bot:</strong> Hi there! I can help you with nutrition advice. What would you like to know?</div>
+        </div>
+        <div class="input-group">
+            <input type="text" id="userInput" class="form-control" placeholder="Type your question..." aria-label="User Input">
+            <div class="input-group-append">
+                <button class="btn btn-primary" id="sendBtn">Send</button>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer class="bg-primary text-white text-center py-3">
+    <p>&copy; 2024 Diabetes Prediction App. All rights reserved.</p>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    // Chatbot functionality
+    document.getElementById('sendBtn').addEventListener('click', function() {
+        var userInput = document.getElementById('userInput').value;
+        var chatbot = document.getElementById('chatbot');
+
+        // Check if user input is empty
+        if (userInput.trim() === "") {
+            return; // Do nothing if input is empty
+        }
+
+        // Display user's message
+        chatbot.innerHTML += '<div><strong>You:</strong> ' + userInput + '</div>';
+
+        // Send user input to the Django backend via AJAX
+        fetch("{% url 'chatbot_view' %}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}",  // Include CSRF token for security
+            },
+            body: JSON.stringify({ user_input: userInput })  // Send user input
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Display bot's response
+            chatbot.innerHTML += '<div><strong>Bot:</strong> ' + data.response + '</div>';
+            chatbot.scrollTop = chatbot.scrollHeight; // Scroll to the bottom
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+        // Clear user input
+        document.getElementById('userInput').value = '';
+    });
+</script>

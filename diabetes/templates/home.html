@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Prediction</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .media-item img, .media-item video {
+            border-radius: 5px;
+            max-height: 200px;
+        }
+        .service-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            background-color: white;
+            margin-bottom: 20px;
+        }
+        .service-card img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            border-radius: 5px;
+        }
+    </style>
+    {% load static %}
+</head>
+<body>
+
+<header class="bg-primary text-white text-center py-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#home">Health Prediction App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'services' %}">Services</a>
+                </li>   
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="container my-4">
+    <!-- Home Section -->
+    <section id="home" class="welcome text-center mb-4">
+        <h1>Welcome to the Health Prediction App</h1>
+        <p>Use our application to predict diabetes risk based on your health data.</p>
+        <p><a class="btn btn-primary" href="#predict">Go to Prediction</a></p>
+    </section>
+
+    <section class="media-section row mb-4">
+        <div class="col-md-12 mb-3">
+            <h3>Informative Video</h3>
+            <iframe width="100%" height="400" src="https://www.youtube.com/embed/qAZAWBJfCqs" frameborder="0" allowfullscreen></iframe>
+            <p>Watch this video to understand more about diabetes testing.</p>
+        </div>
+        <div class="col-md-6 mb-3">
+            <h3>Health Disease Awareness</h3>
+            <img src="{% static 'images/image1.jpg' %}" alt="Health Diseases" class="img-fluid" style="width: 90%; height: 300px; object-fit: cover;" />
+            <p>Stay informed about various health diseases.</p>
+        </div>
+        <div class="col-md-6 mb-3">
+            <h3>Lab Testing Overview</h3>
+            <video controls class="w-100">
+                <source src="{% static 'videos/video2.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>Learn about different lab tests for diabetes.</p>
+        </div>
+        <div class="col-md-6 mb-3">
+            <h3>Healthy Lifestyle Tips</h3>
+            <img src="{% static 'images/image2.jpg' %}" alt="Healthy Lifestyle" class="img-fluid" />
+            <p>Explore tips to maintain a healthy lifestyle.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-form mb-4">
+        <h2>Contact Us</h2>
+        <form method="POST" action="{% url 'contact' %}" class="bg-light p-4 rounded shadow-sm">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send</button>
+        </form>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="my-4">
+        <h2 class="text-center">Our Services</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="service-card">
+                    <img src="{% static 'images/service1.png' %}" alt="Diabetes Prediction" />
+                    <h4>Diabetes Prediction</h4>
+                    <p>Get accurate predictions based on your health data.</p>
+                    <a class="btn btn-primary" href="{% url 'predict_diabetes' %}">Predict Now</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-card">
+                    <img src="{% static 'images/service2.jpg' %}" alt="Health Consultation" />
+                    <h4>Health Consultation</h4>
+                    <p>Consult with health professionals for personalized advice.</p>
+                    <a class="btn btn-primary" href="#contact">Contact Us</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-card">
+                    <img src="{% static 'images/service3.jpg' %}" alt="Lab Testing" />
+                    <h4>Lab Testing</h4>
+                    <p>Find out about lab tests available for diabetes.</p>
+                    <a class="btn btn-primary" href="#contact">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="bg-primary text-white text-center py-3">
+    <p>&copy; 2024 Diabetes Prediction App. All rights reserved.</p>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

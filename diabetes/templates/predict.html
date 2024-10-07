@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4; /* Match home page background */
+        }
+        .container {
+            background-color: white; /* White background for form */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            padding: 20px; /* Padding around the content */
+        }
+    </style>
+</head>
+<body>
+
+<header class="bg-primary text-white text-center py-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#home">Health Prediction App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'services' %}">Services</a>
+                </li>   
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main class="container my-4">
+    <section class="text-center mb-4">
+        <h1>Diabetes Prediction</h1>
+        <p>Fill in your health data below to predict your diabetes risk.</p>
+    </section>
+
+    <div class="container my-4">
+        <form action="{% url 'predict_diabetes' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="pregnancies">Pregnancies:</label>
+                <input type="number" class="form-control" name="pregnancies" required>
+            </div>
+            <div class="form-group">
+                <label for="glucose">Glucose:</label>
+                <input type="number" class="form-control" name="glucose" required>
+            </div>
+            <div class="form-group">
+                <label for="blood_pressure">Blood Pressure:</label>
+                <input type="number" class="form-control" name="blood_pressure" required>
+            </div>
+            <div class="form-group">
+                <label for="skin_thickness">Skin Thickness:</label>
+                <input type="number" class="form-control" name="skin_thickness" required>
+            </div>
+            <div class="form-group">
+                <label for="insulin">Insulin:</label>
+                <input type="number" class="form-control" name="insulin" required>
+            </div>
+            <div class="form-group">
+                <label for="bmi">BMI:</label>
+                <input type="number" class="form-control" name="bmi" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="diabetes_pedigree_function">Diabetes Pedigree Function:</label>
+                <input type="number" class="form-control" name="diabetes_pedigree_function" step="0.001" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" name="age" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Predict</button>
+        </form>
+    </div>
+</main>
+
+<footer class="bg-primary text-white text-center py-3">
+    <p>&copy; 2024 Diabetes Prediction App. All rights reserved.</p>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
